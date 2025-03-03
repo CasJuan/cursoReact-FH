@@ -5,16 +5,16 @@ import {Fragment} from 'react'
 //   title: 'Juan'
 // };
 
-const getResult = () => {
-  return 4 + 4;
-}
+// const getResult = () => {
+//   return 4 + 4;
+// }
 
-export const FirstApp = () => {
+export const FirstApp = ( {title}  ) => {
     
   return (
     <>
 
-    <h1>{getResult()}</h1>
+    <h1>{title}</h1>
     {/* <code>{ JSON.stringify(newMessage) }</code> */}
     <p>Soy un subtitulo</p>
     

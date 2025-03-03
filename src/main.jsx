@@ -10,6 +10,6 @@ import './style.css';
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
         <HelloWorld/>
-        <FirstApp/>
+        <FirstApp title="Hola, soy Goku"/>
     </React.StrictMode>
 )
