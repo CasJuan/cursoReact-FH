@@ -9,16 +9,24 @@ import {Fragment} from 'react'
 //   return 4 + 4;
 // }
 
-export const FirstApp = ( {title}  ) => {
+import PropTypes from 'prop-types';
+
+
+export const FirstApp = ( {title, subTitle}  ) => {
     
   return (
     <>
 
     <h1>{title}</h1>
     {/* <code>{ JSON.stringify(newMessage) }</code> */}
-    <p>Soy un subtitulo</p>
+    <p>{subTitle}</p>
     
     
     </>
   )
+}
+
+FirstApp.propTypes = {
+  title: PropTypes.string.isRequired,
+  subTitle: PropTypes.number.isRequired
 }
