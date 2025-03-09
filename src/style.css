@@ -13,6 +13,7 @@ button {
     border-radius: 50px;
     cursor: pointer;
     color: black;
+    margin-right: 5px;
 }
 
 button:hover{
