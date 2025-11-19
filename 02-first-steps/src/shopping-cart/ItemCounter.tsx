@@ -1,11 +1,10 @@
 import { useState } from "react";
 
 
-/* import './itemCounter.css';
+import './itemCounter.css';
+
+/* import styles from './itemCounter.module.css';
  */
-
-import styles from './itemCounter.module.css';
-
 interface Props {
     name: string;
     quantity?: number;
@@ -27,7 +26,7 @@ export const ItemCounter = ({name, quantity = 1}: Props) => {
 
   return (
     <>
-    <section className={styles.itemRow} >
+    <section className="item-row" >
         <span 
             className="item-text"
             style={{
