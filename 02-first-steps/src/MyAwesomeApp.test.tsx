@@ -10,7 +10,7 @@ describe('MyAwesomeApp', () => {
         const h1 = container.querySelector('h1');
         expect(h1?.innerHTML).toContain('Juan');
 
-        const h3 = container.querySelector('h1');
+        const h3 = container.querySelector('h3');
         expect(h3?.innerHTML).toContain('Castro');
      })
 
@@ -25,6 +25,16 @@ describe('MyAwesomeApp', () => {
         const h1 = screen.getByTestId('first-name-title');
         expect(h1.innerHTML).toContain('Juan');
 
+    })
+    
+    test('should match snapshot', () => { 
+        const {container} = render(<MyAwesomeApp/>);
+        expect(container).toMatchSnapshot();
+     })
+
+    test('should match snapshot', () => { 
+        render(<MyAwesomeApp/>);
+        expect(screen.getByTestId('div-app')).toMatchSnapshot();
     })
 })
 
