@@ -1,17 +1,23 @@
 //TAREA
+
+import type { CSSProperties } from "react";
+
+  const firstName = 'Juan';
+  const lastName = 'Castro';
+
+  const favoriteGames = ['Elden Ring', 'Smash', 'Metal gear'];
+  const isActive = false;
+  const address = {
+    zipCode: 'ABC-123',
+    country: 'Canada'
+  }
+  const myStyle:CSSProperties = {
+    backgroundColor: 'red',
+    borderRadius: 10,
+    padding: 10
+  }
+
 export const MyAwesomeApp = () => {
-
-    const firstName = 'Juan';
-    const lastName = 'Castro';
-
-    const favoriteGames = ['Elden Ring', 'Smash', 'Metal gear'];
-    const isActive = false;
-
-    const address = {
-      zipCode: 'ABC-123',
-      country: 'Canada'
-    }
-
   return (
     <>
         <h1>{firstName}</h1>
@@ -21,7 +27,17 @@ export const MyAwesomeApp = () => {
 
         <h1>{isActive ? 'Activo' : 'No activo'}</h1>
 
-        <p>
+        <p
+          style={{
+              backgroundColor: '#fafafa',
+              borderRadius: 10,
+              padding: 10
+            }}
+        >
+          {JSON.stringify(address)}
+        </p>
+
+        <p style={myStyle}>
           {JSON.stringify(address)}
         </p>
     </>
