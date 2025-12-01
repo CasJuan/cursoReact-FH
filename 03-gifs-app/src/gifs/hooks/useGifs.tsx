@@ -1,0 +1,41 @@
+import React, { useState } from 'react'
+import type { Gif } from '../intefaces/gif.interface';
+import { getGifsByQuery } from '../actions/get-gif-by-query.action';
+
+export const useGifs = () => {
+
+    const [previousTerms, setPreviousTerms] = useState<string>([]);
+
+    const [gifs, setGifs] = useState<Gif[]>([]);
+
+    const handleTermClicked = async(term: string) => {
+        const gifs = await getGifsByQuery(term);
+        setGifs(gifs);
+    }
+
+    const handleSearch = async (query: string = '') => { 
+        query = query.trim().toLowerCase();
+
+        if (query.length === 0) return;
+
+        if (previousTerms.includes(query)) return;
+
+        setPreviousTerms([query, ...previousTerms].slice(0, 8));
+
+        const gifs = await getGifsByQuery(query);
+
+        setGifs(gifs);
+    }
+
+
+    return {
+        //Values
+        previousTerms,
+        gifs,
+
+        //Methods
+        handleTermClicked,
+        handleSearch
+
+    }
+}
