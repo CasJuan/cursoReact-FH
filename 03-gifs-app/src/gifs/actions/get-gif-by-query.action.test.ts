@@ -1,4 +1,4 @@
-import { describe, expect, test } from "vitest";
+import { beforeEach, describe, expect, test } from "vitest";
 import { getGifsByQuery } from "./get-gif-by-query.action";
 
 import {giphyResponseMock} from '../../../test/mock/giphy.response.data'
@@ -21,7 +21,12 @@ describe('getGifByQuert', () => {
         });
     }) */
    
-    const mock = new AxiosMockAdapter(giphyApi);
+    let mock = new AxiosMockAdapter(giphyApi);
+
+    beforeEach(() => {
+        //(mock.reset();
+        mock = new AxiosMockAdapter(giphyApi);
+    })
 
     test('should return a lift of gifs', async() => { 
         mock.onGet('/search').reply(200, giphyResponseMock);
@@ -37,6 +42,26 @@ describe('getGifByQuert', () => {
             expect(typeof gif.width).toBe('number');
             expect(typeof gif.height).toBe('number');
         })
+    })
+
+    test('should return an empty lift of gifs if query is empty', async() => { 
+        //mock.onGet('/search').reply(200, giphyResponseMock);
+        mock.restore();
+        
+        const gifs = await getGifsByQuery('');
+        
+        expect(gifs.length).toBe(0);
+    })
+
+    test('should handle error when the API returns an error', async() => { 
+       mock.onGet('/search').reply(400, {
+        data:{
+            message: 'Bad Request'
+        }
+       });
+       const gifs = await getGifsByQuery('goku')
+
+       expect(gifs.length).toBe(0);
     })
 
 })
