@@ -1,9 +1,15 @@
 import { describe, expect, test } from "vitest";
 import { getGifsByQuery } from "./get-gif-by-query.action";
 
+import {giphyResponseMock} from '../../../test/mock/giphy.response.data'
+
+import AxiosMockAdapter from 'axios-mock-adapter';
+import { giphyApi } from "../api/giphy.api";
+
+
 describe('getGifByQuert', () => {
     
-    test('should return a list of gifs', async() => { 
+    /* test('should return a list of gifs', async() => { 
         const gifs = await getGifsByQuery('goku');
         const [gif1] = gifs;
         expect(gif1).toStrictEqual({
@@ -13,6 +19,24 @@ describe('getGifByQuert', () => {
             title:expect.any(String),
             url:expect.any(String)
         });
+    }) */
+   
+    const mock = new AxiosMockAdapter(giphyApi);
+
+    test('should return a lift of gifs', async() => { 
+        mock.onGet('/search').reply(200, giphyResponseMock);
+        
+        const gifs = await getGifsByQuery('goku');
+        
+        /* expect(gifs.length).toBe(10); */
+        
+        gifs.forEach((gif) => {
+            expect(typeof gif.id).toBe('string');
+            expect(typeof gif.title).toBe('string');
+            expect(typeof gif.url).toBe('string');
+            expect(typeof gif.width).toBe('number');
+            expect(typeof gif.height).toBe('number');
+        })
     })
 
 })
