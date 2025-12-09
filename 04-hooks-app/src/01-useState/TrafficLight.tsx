@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Onclick } from '../../../03-gifs-app/src/gifs/intefaces/giphy.response';
 
 const colors = {
     red: 'bg-red-500 animate-pulse',
@@ -7,11 +6,14 @@ const colors = {
     green: 'bg-green-500 animate-pulse',
 }
 
+//type TrafficLightColor = 'red' | 'yellow' | 'green';
+type TrafficLightColor = keyof typeof colors;
+
 export const TrafficLight = () => {
 
-    const [light, setLight] = useState('red');
+    const [light, setLight] = useState<TrafficLightColor>('red');
 
-    const handleColorChange = (color: string) => {
+    const handleColorChange = (color: TrafficLightColor) => {
         setLight((prev) => {
             console.log({prev})
             return color;
