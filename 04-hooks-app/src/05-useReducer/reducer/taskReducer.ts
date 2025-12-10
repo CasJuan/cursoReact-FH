@@ -1,3 +1,4 @@
+import { todo } from "node:test";
 import { act } from "react";
 
 interface Todo {
@@ -32,22 +33,40 @@ export const taskReducer = (state: TaskState, action: TaskAction): TaskState => 
             return {
                 ...state,
                 todos: [...state.todos, newTodo],
+                length: state.todos.length + 1,
+                pending: state.pending + 1,  
             };
         }
-        case "TOGGLE_TODO":
-            return {
+        case "TOGGLE_TODO": {
                 const updateTodos = state.todos.map(todo => {
                     if (todo.id === action.payload) {
                         return { ...todo, completed: !todo.completed }
                     }
                     return todo;
-                })
+                });
+
+                return {
+                    ...state,
+                    todos: updateTodos,
+                    completed: updateTodos.filter(todo => todo.completed).length,
+                    pending: updateTodos.filter(todo => !todo.completed).length,
+                }
             }
-        case "DELETE_TODO":
+        case "DELETE_TODO": {
+            const currentsTodos = state.todos.filter((todo) => todo.id !== action.payload)
+
+            //const completeTodos = currentsTodos.filter(todo => todo.completed).length,
+            //const pendingTodos = currentsTodos.length - completeTodos;
+
             return {
                 ...state,
-                todos: state.todos.filter((todo) => todo.id !== action.payload)
+                todos: currentsTodos,
+                length: currentsTodos.length,
+                completed: currentsTodos.filter(todo => todo.completed).length,
+                pending: currentsTodos.filter(todo => !todo.completed).length,
+
             }
+        }
         default:
             return state;
     }
