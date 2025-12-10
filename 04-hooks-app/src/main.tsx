@@ -7,6 +7,7 @@ import { TrafficLightEffect } from './02-useEffect/TrafficLightEffect';
 import { TrafficLightWithHook } from './02-useEffect/TrafficLightWithHook';
 import { PokemonPage } from './03-examples/PokemonPage';
 import { FocusScreen } from './04-useRef/FocusScreen';
+import { TasksApp } from './05-useReducer/TaskApp';
 
 
 createRoot(document.getElementById('root')!).render(
@@ -16,6 +17,7 @@ createRoot(document.getElementById('root')!).render(
     {/* <TrafficLightEffect/> */}
     {/* <TrafficLightWithHook/> */}
     {/* <PokemonPage/> */}
-    <FocusScreen/>
+    {/* <FocusScreen/> */}
+    <TasksApp/>
   </StrictMode>,
 )
