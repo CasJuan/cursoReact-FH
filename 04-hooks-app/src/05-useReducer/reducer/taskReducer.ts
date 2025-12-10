@@ -1,6 +1,3 @@
-import { todo } from "node:test";
-import { act } from "react";
-
 interface Todo {
     id: number;
     text: string;
@@ -19,6 +16,15 @@ export type TaskAction =
     | { type: 'TOGGLE_TODO', payload: number }
     | { type: 'DELETE_TODO', payload: number }
 
+
+export const getTaskInitialState = (): TaskState => {
+    return {
+        todos: [],
+        completed: 0,
+        pending: 0,
+        length: 0,
+    }
+}
 
 export const taskReducer = (state: TaskState, action: TaskAction): TaskState => {
 
