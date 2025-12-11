@@ -24,60 +24,24 @@ export const ScrambleWords = () => {
         totalWords
     } = state;
 
-  /* const [words, setWords] = useState(shuffleArray(GAME_WORDS));
-  const [currentWord, setCurrentWord] = useState(words[0]);
-  const [scrambledWord, setScrambledWord] = useState(scrambleWord(currentWord));
-  const [guess, setGuess] = useState('');
-  const [points, setPoints] = useState(0);
-  const [errorCounter, setErrorCounter] = useState(0);
-  const [maxAllowErrors, setMaxAllowErrors] = useState(3);
-  const [skipCounter, setSkipCounter] = useState(0);
-  const [maxSkips, setMaxSkips] = useState(3);
-  const [isGameOver, setIsGameOver] = useState(false); */
-
   const handleGuessSubmit = (e: React.FormEvent) => {
-    /* e.preventDefault();
-    if(guess === currentWord) {
-        const newWords = words.slice(1);
-        confetti({
-            particleCount:100,
-            spread: 120,
-            origin: {y:0.6}
-        })
-        setPoints((prev) => prev + 1)
-        setGuess('');
-        setWords(newWords)
-        setCurrentWord(newWords[0])
-        setScrambledWord(scrambleWord(newWords[0]))
-        return;
-    }
-    setErrorCounter(errorCounter + 1 )
-    setGuess('');
-    if (errorCounter + 1 >= maxAllowErrors) {
-        setIsGameOver(true);
-    } */
+    e.preventDefault();
+    dispatch({
+        type:'CHECK_ANSWER'
+    })
   };
 
   const handleSkip = () => {
-    /* if(skipCounter >= maxSkips) return;
-    const updateWords = words.slice(1);
-    setSkipCounter(skipCounter + 1);
-    setWords(updateWords);
-    setCurrentWord(updateWords[0]);
-    setScrambledWord(scrambleWord(updateWords[0]))
-    setGuess(''); */
+    dispatch({
+        type: 'SKIP_WORD'
+    })
   };
 
   const handlePlayAgain = () => {
-    /* const newArray = shuffleArray(GAME_WORDS)
-    setPoints(0)
-    setErrorCounter(0)
-    setGuess('');
-    setWords(newArray);
-    setCurrentWord(newArray[0])
-    setIsGameOver(false);
-    setSkipCounter(0);
-    setScrambledWord(scrambleWord(newArray[0])) */
+    dispatch({
+        type: 'START_NEW_GAME',
+        payload: getInitialState()
+    })
   };
 
   if (words.length === 0) {
@@ -158,8 +122,10 @@ export const ScrambleWords = () => {
                     type="text"
                     value={guess}
                     onChange={(e) =>
-                      //setGuess(e.target.value.toUpperCase().trim())
-                      console.log(e.target.value)
+                      dispatch({
+                        type: 'SET_GUESS',
+                        payload: e.target.value
+                      })
                     }
                     placeholder="Ingresa tu palabra..."
                     className="text-center text-lg font-semibold h-12 border-2 border-indigo-200 focus:border-indigo-500 transition-colors"
