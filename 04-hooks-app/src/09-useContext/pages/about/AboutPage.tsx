@@ -1,8 +1,19 @@
+import { Link } from 'react-router'
 import React from 'react'
 
 const AboutPage = () => {
   return (
-    <div>AboutPage</div>
+    <div className='flex flex-col justify-center items-center min-h-screen'>
+      <h1 className='text-4xl font-bold'>Pagina sobre mi</h1>
+      <hr />
+
+      <div className='flex flex-col gap-2'>
+          <Link to="/profile" className='hover:text-blue-500 underline text-2xl'>Perfil</Link>
+          <Link to="/login" className='hover:text-blue-500 underline  text-2xl'>Iniciar Sesion</Link>
+      </div>
+
+
+    </div>
   )
 }
 
