@@ -1,4 +1,4 @@
-import { createContext, useState, type PropsWithChildren } from "react"
+import { createContext, useEffect, useState, type PropsWithChildren } from "react"
 import { users, type User } from "../data/user-mock.data";
 
 /* inteface UserContextProps {
@@ -11,7 +11,7 @@ type AuthStatus = 'cheking' | 'authenticated' | 'not-authenticated';
 interface UserContextProps {
     //state
     authStatus: AuthStatus;
-    user:  User | null;
+    user: User | null;
 
     //Methods
     login: (userId: number) => boolean;
@@ -21,15 +21,14 @@ interface UserContextProps {
 export const UserContext = createContext({} as UserContextProps)
 
 
+export const UserContextProvider = ({ children }: PropsWithChildren) => {
 
-export const UserContextProvider= ({children}: PropsWithChildren) => {
-  
     const [authStatus, setAuthStatus] = useState<AuthStatus>('cheking');
-    const [user, setUser] = useState<User|null>(null);
+    const [user, setUser] = useState<User | null>(null);
 
     const handleLogin = (userId: number) => {
         const user = users.find(user => user.id === userId);
-        if(!user){
+        if (!user) {
             console.log(`User not found ${userId}`);
             setUser(null);
             setAuthStatus('not-authenticated');
@@ -37,21 +36,30 @@ export const UserContextProvider= ({children}: PropsWithChildren) => {
         }
         setUser(user);
         setAuthStatus('authenticated');
+        localStorage.setItem('userId', userId.toString());
         return true;
     }
+
     const handleLogut = () => {
-        console.log('logout')
         setAuthStatus('not-authenticated');
         setUser(null);
-    }
-  
-  
+        localStorage.removeItem('userId');
+    };
+
+    useEffect(() => {
+        const storeUserId = localStorage.getItem('userId');
+        if(storeUserId){
+            handleLogin(+storeUserId);
+            return;
+        }
+    },[])
+
     return <UserContext
-  value={{
-    authStatus: authStatus,
-    user:user,
-    login:handleLogin,
-    logout: handleLogut,
-  }}> {children} </UserContext>
+        value={{
+            authStatus: authStatus,
+            user: user,
+            login: handleLogin,
+            logout: handleLogut,
+        }}> {children} </UserContext>
 }
 
