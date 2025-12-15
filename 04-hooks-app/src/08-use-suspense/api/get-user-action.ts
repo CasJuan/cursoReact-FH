@@ -7,8 +7,11 @@ export interface User {
     role: string
 }
 
-export const getUserAction = async() => {
+export const getUserAction = async(id: number) => {
+    console.log('Funcion llamada')
     await new Promise((res) => setTimeout(res, 2000));
+
+    console.log('Funcion resuelta')
 
     return{
         id:id,
