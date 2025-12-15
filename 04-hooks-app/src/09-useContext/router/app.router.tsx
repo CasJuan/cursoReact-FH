@@ -3,6 +3,7 @@ import { RouterProvider } from "react-router/dom";
 import AboutPage from "../pages/about/AboutPage";
 import ProfilePage from "../pages/profile/ProfilePage";
 import { LoginPages } from "../pages/auth/LoginPages";
+import { PrivateRoute } from "./PrivateRoute";
 
 export const appRouter = createBrowserRouter([
   {
@@ -11,7 +12,8 @@ export const appRouter = createBrowserRouter([
   },
   {
     path: "/profile",
-    element: <ProfilePage/>,
+    element: <PrivateRoute element={<ProfilePage/>} />,
+    /* element: <ProfilePage/> */
   },
   {
     path: "/login",
