@@ -14,10 +14,6 @@ const ProfilePage = () => {
 
       <Button variant="destructive">Salir</Button>
 
-
-
-
-
     </div>
   )
 }
