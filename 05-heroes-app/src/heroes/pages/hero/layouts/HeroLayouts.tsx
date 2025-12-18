@@ -1,10 +1,28 @@
-import { Outlet } from "react-router"
+import { Link, Outlet } from "react-router"
 
 export const HeroLayouts = () => {
-  return (
-    <div className="bg-red-500">
-        <h1>Hola Mundo</h1>
-        <Outlet/>
-    </div>
-  )
+    return (
+        <div className="bg-red-200">
+
+            <ul>
+                <li>
+                    <Link to='/'>Home</Link>
+                </li>
+                <li>
+                    <Link to='/heroes/1'>Hero</Link>
+                </li>
+                <li>
+                    <Link to='/search'>Busqueda</Link>
+                </li>
+                <li>
+                    <Link to='/admin'>Admin</Link>
+                </li>
+            </ul>
+
+            <section className="mt-10">
+                <Outlet />
+            </section>
+
+        </div>
+    )
 }
