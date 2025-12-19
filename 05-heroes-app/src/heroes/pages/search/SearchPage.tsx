@@ -1,4 +1,5 @@
 import { CustomJumboton } from "@/components/custom/CustomJumboton"
+import { HeroStats } from "@/heroes/components/HeroStats"
 
 const SearchPage = () => {
   return (
@@ -7,6 +8,8 @@ const SearchPage = () => {
         title="Universo de SuperHeroes"
         description="Descubre, explora y administra super heroes y villanos"
       />
+
+      <HeroStats/>
 
     </>
   )
