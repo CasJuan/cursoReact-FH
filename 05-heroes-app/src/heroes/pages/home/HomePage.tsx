@@ -1,11 +1,7 @@
 import {
-  Heart,
-  ChevronLeft,
-  ChevronRight,
-  MoreHorizontal,
+  Heart
 } from "lucide-react"
 
-import { Button } from "@/components/ui/button"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { CustomJumboton } from "@/components/custom/CustomJumboton"
 import { HeroStats } from "@/heroes/components/HeroStats"
