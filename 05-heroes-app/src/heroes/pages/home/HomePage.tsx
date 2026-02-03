@@ -9,7 +9,8 @@ import { HeroGrid } from "@/heroes/components/HeroGrid"
 import { useEffect, useState } from "react"
 import { CustomPagination } from "@/components/custom/CustomPagination"
 import { CustomBreadcrums } from "@/components/custom/CustomBreadcrums"
-import { getHeroByPage } from "@/heroes/actions/get-heroes-by-page.action"
+import { getHeroByPageAction } from "@/heroes/actions/get-heroes-by-page.action"
+import { useQuery } from "@tanstack/react-query"
 
 
 
@@ -22,11 +23,15 @@ export const HomePage = () => {
   'villains' 
     > ('all');
 
-    useEffect(() => {
-      getHeroByPage().then(heroes => {
-        console.log({heroes})
-      })
-    }, [])
+    /* useEffect(() => {
+      getHeroByPage().then();
+    }, []) */
+
+    const  {data} = useQuery({
+      queryKey: ['heroes'],
+      queryFn: () => getHeroByPageAction(),
+      staleTime: 1000 * 60 * 5,
+    })
     
 
   return (
