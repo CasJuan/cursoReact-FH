@@ -73,15 +73,15 @@ export const HomePage = () => {
           </TabsContent>
 
           <TabsContent value="favorites">
-            <HeroGrid />
+            <HeroGrid heroes={[]}/>
           </TabsContent>
 
           <TabsContent value="heroes">
-            <HeroGrid />
+            <HeroGrid heroes={[]}/>
           </TabsContent>
 
           <TabsContent value="villains">
-            <HeroGrid />
+            <HeroGrid heroes={[]}/>
           </TabsContent>
 
         </Tabs>

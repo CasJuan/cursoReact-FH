@@ -10,7 +10,7 @@ export const getHeroByPageAction = async(): Promise<HeroesResponse> => {
 
     const heroes = data.heroes.map(hero => ({
         ...hero,
-        image: `${BASE_URL}/image/${hero.image}`
+        image: `${BASE_URL}/images/${hero.image}`
     }))
 
     return {
