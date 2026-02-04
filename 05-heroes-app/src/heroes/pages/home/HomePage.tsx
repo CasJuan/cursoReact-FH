@@ -16,23 +16,25 @@ import { useQuery } from "@tanstack/react-query"
 
 export const HomePage = () => {
 
-  const [activeTab, setActiveTab] = useState <
+  const [activeTab, setActiveTab] = useState<
     'all' |
-  'favorites' |
-  'heroes' |
-  'villains' 
-    > ('all');
+    'favorites' |
+    'heroes' |
+    'villains'
+  >('all');
 
-    /* useEffect(() => {
-      getHeroByPage().then();
-    }, []) */
+  /* useEffect(() => {
+    getHeroByPage().then();
+  }, []) */
 
-    const  {data} = useQuery({
-      queryKey: ['heroes'],
-      queryFn: () => getHeroByPageAction(),
-      staleTime: 1000 * 60 * 5,
-    })
-    
+  const { data } = useQuery({
+    queryKey: ['heroes'],
+    queryFn: () => getHeroByPageAction(),
+    staleTime: 1000 * 60 * 5,
+  })
+
+  console.log(data)
+
 
   return (
     <>
@@ -43,7 +45,7 @@ export const HomePage = () => {
           description="Descubre, explora y administra super heroes y villanos"
         />
 
-        <CustomBreadcrums currentPage="Super Hèroes"/>
+        <CustomBreadcrums currentPage="Super Hèroes" />
 
         {/* Stats Dashboard */}
         <HeroStats />
@@ -65,31 +67,31 @@ export const HomePage = () => {
             <TabsTrigger onClick={() => setActiveTab('heroes')} value="heroes">Heroes (12)</TabsTrigger>
             <TabsTrigger onClick={() => setActiveTab('villains')} value="villains">Villains (2)</TabsTrigger>
           </TabsList>
-          
+
           <TabsContent value="all">
             <HeroGrid />
           </TabsContent>
-          
+
           <TabsContent value="favorites">
             <HeroGrid />
           </TabsContent>
-          
+
           <TabsContent value="heroes">
             <HeroGrid />
           </TabsContent>
-          
+
           <TabsContent value="villains">
             <HeroGrid />
           </TabsContent>
-        
+
         </Tabs>
 
         {/* Character Grid */}
-        
+
 
         {/* Pagination */}
-        <CustomPagination totalPages={8}/>
-        
+        <CustomPagination totalPages={8} />
+
       </>
     </>
   )
