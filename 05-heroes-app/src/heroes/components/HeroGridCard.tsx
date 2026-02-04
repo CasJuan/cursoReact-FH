@@ -4,6 +4,7 @@ import { Card, CardHeader, CardContent } from '@/components/ui/card'
 import { Progress } from "@/components/ui/progress"
 import { Heart, Eye, Zap, Brain, Gauge, Shield } from 'lucide-react'
 import type { Hero } from '../types/hero.interface'
+import { useNavigate } from 'react-router'
 
 
 
@@ -13,13 +14,23 @@ interface Props {
 
 
 export const HeroGridCard = ({hero} : Props) => {
+
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate(`/heroes/${hero.slug}`)
+    }
+
+
+
     return (
         <Card className="group overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-linear-to-br from-white to-gray-50">
-            <div className="relative h-64 overflow-hidden">
+            <div className="relative h-64">
                 <img
                     src={hero.image}
                     alt={hero.name}
-                    className="object-cover transition-all duration-500 group-hover:scale-110"
+                    className="object-cover transition-all duration-500 group-hover:scale-110 absolute top-[-30px] w-full h-[410px]"
+                    onClick={handleClick}
                 />
 
                 {/* Status indicator */}
@@ -56,7 +67,7 @@ export const HeroGridCard = ({hero} : Props) => {
                 </Button>
             </div>
 
-            <CardHeader className="pb-3">
+            <CardHeader className="duration-300 transition-all group-hover:top-[-10px] top-1 relative backdrop-blur-sm bg-gray-100/50 py-3 z-10">
                 <div className="flex justify-between items-start">
                     <div className="space-y-1">
                         <h3 className="font-bold text-lg leading-tight">{hero.alias}</h3>
@@ -113,7 +124,7 @@ export const HeroGridCard = ({hero} : Props) => {
 
                         {
                             hero.powers.slice(0,3).map(power => (
-                        <Badge variant="outline" className="text-xs">
+                        <Badge variant="outline" className="text-xs" key={power}>
                             {power}
                         </Badge>
                                 
